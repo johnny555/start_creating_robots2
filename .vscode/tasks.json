@@ -1,0 +1,81 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // Build tasks
+        {
+            "label": "build",
+            "detail": "Build workspace (default)",
+            "type": "shell",
+            "command": "bash .vscode/scripts/build.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+        {
+            "label": "setup",
+            "detail": "Set up the workspace",
+            "type": "shell",
+            "command": "bash .vscode/scripts/setup.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "freecad",
+            "detail": "Open freecad first robot",
+            "type": "shell",
+            "command": "bash .vscode/scripts/run_freecad.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "detail": "Run the clean target",
+            "type": "shell",
+            "command": "colcon build --cmake-target clean",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "purge",
+            "detail": "Purge workspace by deleting all generated files.",
+            "type": "shell",
+            "command": "rm -fr build install log; py3clean .",
+            "problemMatcher": []
+        },
+        {
+            "label": "Gazebo Test",
+            "detail": "Test that Gazebo works!",
+            "type": "shell",
+            "command": "bash .vscode/scripts/gazebo_test.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "Krytn Navigation",
+            "detail": "Setup Krytn Autonomous Navigation",
+            "type": "shell",
+            "command": "bash .vscode/scripts/krytn_navigation.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "Maci Gazebo",
+            "detail": "Run MACI Robot Arm simulation",
+            "type": "shell",
+            "command": "bash .vscode/scripts/maci_gazebo.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "Simulate the first robot",
+            "detail": "Run Gazebo with your robot!",
+            "type": "shell",
+            "command": "bash .vscode/scripts/first_robot_gazebo.sh",
+            "problemMatcher": []
+        }
+    ]
+}

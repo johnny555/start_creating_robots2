@@ -1,0 +1,101 @@
+<robot name="sensor_d435"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:macro name="realsense" params="world_link_name *origin">
+        <link name="realsense_link">
+            <xacro:box_inertial x="0.02" y="0.1" z="0.01" mass="0.06"/>
+
+
+            <collision name="collision">
+                <origin rpy="0 0 ${pi/2}"/>
+                <geometry>
+                    <mesh filename="package://sensors/realsense_d435/meshes/realsense.dae" />
+                </geometry>
+            </collision>
+            <visual name= "visual">
+                <origin rpy="0 0 ${pi/2}"/>
+                <geometry>
+                    <mesh filename="package://sensors/realsense_d435/meshes/realsense.dae"/>
+                </geometry>
+                <gazebo>
+                    <material>
+                        <diffuse>1.0 1.0 1.0</diffuse>
+                        <specular>1.0 1.0 1.0</specular>
+                        <pbr>
+                            <metal>
+                                <albedo_map>package://sensors/realsense_d435/materials/textures/RealSense_Albedo.png</albedo_map>
+                                <normal_map>package://sensors/realsense_d435/materials/textures/RealSense_Normal.png</normal_map>
+                                <metalness_map>package://sensors/realsense_d435/materials/textures/RealSense_Metalness.png</metalness_map>
+                                <roughness_map>package://sensors/realsense_d435/materials/textures/RealSense_Roughness.png</roughness_map>
+                            </metal>
+                        </pbr>
+                        <!-- fallback to script if no PBR support-->
+                        <script>
+                            <uri>package://sensors/realsense_d435/materials/scripts/</uri>
+                            <uri>package://sensors/realsense_d435/materials/textures/</uri>
+                            <name>UrbanTile/RealSense_Diffuse</name>
+                        </script>
+                    </material>
+                </gazebo>
+            </visual>
+        </link>
+
+        <gazebo reference="realsense_link">
+            <sensor name="realsense_d435" type="rgbd_camera">
+                <update_rate>10</update_rate>
+                <topic>realsense</topic>
+                <camera name="camera">
+                    <optical_frame_id>realsense</optical_frame_id>
+
+                    <horizontal_fov>1.0472</horizontal_fov>
+                    <lens>
+                        <intrinsics>
+                            <!-- fx = fy = width / ( 2 * tan (hfov / 2 ) ) -->
+                            <fx>554.25469</fx>
+                            <fy>554.25469</fy>
+                            <!-- cx = ( width + 1 ) / 2 -->
+                            <cx>320.5</cx>
+                            <!-- cy = ( height + 1 ) / 2 -->
+                            <cy>240.5</cy>
+                            <s>0</s>
+                        </intrinsics>
+                    </lens>
+                    <distortion>
+                        <k1>0.0</k1>
+                        <k2>0.0</k2>
+                        <k3>0.0</k3>
+                        <p1>0.0</p1>
+                        <p2>0.0</p2>
+                        <center>0.5 0.5</center>
+                    </distortion>
+                    <image>
+                        <width>640</width>
+                        <height>480</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.01</near>
+                        <far>300</far>
+                    </clip>
+                    <depth_camera>
+                        <clip>
+                            <near>0.1</near>
+                            <far>3</far>
+                        </clip>
+                    </depth_camera>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                </camera>
+            </sensor>
+        </gazebo>
+
+        <joint name="realsense_joint" type="fixed">
+            <child link="realsense_link" />
+            <parent link="${world_link_name}" />
+            <xacro:insert_block name="origin"/>
+        </joint>
+    </xacro:macro>
+</robot>

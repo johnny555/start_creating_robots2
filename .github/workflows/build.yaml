@@ -1,0 +1,17 @@
+name: Check Build Is Ok
+on: push
+
+jobs:
+  humble_source:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: humble
+      - uses: ros-tooling/action-ros-ci@v0.3
+        with:
+          package-name: krytn
+          ref: humble
+          target-ros2-distro: humble
+          vcs-repo-file-url: https://raw.githubusercontent.com/johnny555/4robots_ws/humble/src/workspace.repos
+          import-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: maci
+    relative_path: robot_description/maci.urdf.xacro
+  srdf:
+    relative_path: config/maci.srdf
+  package_settings:
+    author_name: John Vial
+    author_email: john@soundelve.com
+    generated_timestamp: 1721639909

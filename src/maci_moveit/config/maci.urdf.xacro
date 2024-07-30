@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="maci">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import maci urdf file -->
+    <xacro:include filename="$(find maci)/robot_description/maci.urdf.xacro" />
+
+
+</robot>

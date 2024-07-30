@@ -1,0 +1,63 @@
+<robot name="sensor_d435"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:macro name="lidar_2d" params="world_link_name *origin">
+        <link name="lidar_2d_link">
+            <xacro:box_inertial x="0.05" y="0.5" z="0.03" mass="0.13"/>
+            <collision name="collision_base">
+                <pose>0 0 0.0175015175 0 0 0</pose>
+                <geometry>
+                    <box size="0.05001062 0.05001062 0.035003035" />
+                </geometry>
+            </collision>
+            <collision name="collision_top">
+                <pose>0 0 0.0525045525 0 0 0</pose>
+                <geometry>
+                    <cylinder radius="0.02" length="0.035003035"/>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <pose>0 0 0 0 0 1.5707</pose>
+                <geometry>
+                    <mesh filename="package://sensors/lidar_2d/meshes/lidar_2d_v1.dae" />
+                </geometry>
+            </visual>
+        </link>
+
+        <gazebo reference="lidar_2d_link">
+            <sensor name="lidar_2d_v1" type="gpu_ray">
+                <topic>lidar</topic>
+                <pose>0 0 0.0525045525 0 0 0</pose>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>180</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-2.356195</min_angle>
+                            <max_angle>2.356195</max_angle>
+                        </horizontal>
+                    </scan>
+                    <range>
+                        <min>0.060</min>
+                        <max>5</max>
+                        <resolution>0.01</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.001</stddev>
+                    </noise>
+                </ray>
+                <always_on>0</always_on>
+                <update_rate>10</update_rate>
+                <visualize>false</visualize>
+            </sensor>
+        </gazebo>
+
+        <joint name="lidar_2d_joint" type="fixed">
+            <child link="lidar_2d_link" />
+            <parent link="${world_link_name}" />
+            <xacro:insert_block name="origin"/>
+        </joint>
+    </xacro:macro>
+</robot>

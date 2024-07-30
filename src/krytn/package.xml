@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>krytn</name>
+  <version>0.2.0</version>
+  <description>Krytn Coffee Robot</description>
+  <maintainer email="john@soundelve.com">john</maintainer>
+  <license>MIT</license>
+
+
+  <depend>rqt_robot_steering</depend>
+  <depend>slam_toolbox</depend>
+  <depend>navigation2</depend>
+  <depend>nav2_bringup</depend>
+  <depend>ros2_control</depend>
+  <depend>gz_ros2_control</depend>
+  <depend>ros2_controllers</depend>
+  <depend>realsense2_description</depend>
+  <depend>python3-flask</depend>
+  <depend>rosbridge_suite</depend>
+
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
