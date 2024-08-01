@@ -27,5 +27,6 @@ ament_auto_package(
     config
     launch
     robot_description
+    worlds
 )
 

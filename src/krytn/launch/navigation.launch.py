@@ -30,22 +30,11 @@ def generate_launch_description():
             'autostart': 'True'
         }.items(),
     )
-    #remap = SetRemap("cmd_vel","/diff_drive_controller/cmd_vel")
 
     nav_remapped = GroupAction(actions=[#remap, 
         navigation])
 
-    twist_stamper = Node(
-        package="twist_stamper",
-        executable="twist_stamper.py",
-        remappings=[("/cmd_vel_in", "/cmd_vel_nav"),
-                       ("/cmd_vel_out",  "/diff_drive_base_controller/cmd_vel")],
-        parameters=[{"use_sim_time","True"}],
-        output="screen",
-        name="twist_stamper_nav"
-    )  
-
 
     return LaunchDescription([
-        gazebo_and_mapping, nav_remapped, twist_stamper
+        gazebo_and_mapping, nav_remapped
     ])

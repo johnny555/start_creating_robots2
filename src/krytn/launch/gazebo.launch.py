@@ -11,7 +11,7 @@ import os
 def generate_launch_description():
 
     # Start a simulation with the cafe world
-    cafe_world_uri = join(get_package_share_directory("gamecity"), "worlds", "gamecity.sdf")
+    cafe_world_uri = join(get_package_share_directory("krytn"), "worlds", "cafe.sdf")
     path = join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
     
     gazebo_sim = IncludeLaunchDescription(path,
@@ -59,33 +59,17 @@ def generate_launch_description():
                    '/realsense/image@sensor_msgs/msg/Image[gz.msgs.Image',
                    '/realsense/depth@sensor_msgs/msg/Image[gz.msgs.Image',
                    '/realsense/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+                   '/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'
                    ],
-        output='screen'
+        output='screen',
+        remappings=[('/model/krytn/cmd_vel','/cmd_vel')]
         )
 
-    
     # A gui tool for easy tele-operation.
     robot_steering = Node(
         package="rqt_robot_steering",
         executable="rqt_robot_steering",
     )
-
-    # Step 5: Enable the ros2 controllers
-    start_controllers  = Node(
-                package="controller_manager",
-                executable="spawner",
-                arguments=['joint_state_broadcaster', 'diff_drive_base_controller'],
-                output="screen",
-            )
-
-    twist_stamper = Node(
-        package="twist_stamper",
-        executable="twist_stamper.py",
-        remappings=[("/cmd_vel_in", "/cmd_vel"),
-                       ("/cmd_vel_out",  "/diff_drive_base_controller/cmd_vel")],
-        parameters=[{"use_sim_time","True"}],
-        output="screen"
-    )  
 
     # Fix Frames while we wait for merged changes to make their way into released packages: 
     # https://github.com/gazebosim/gz-sensors/pull/446/commits/277d3946be832c14391b6feb6971e243f1968486 
@@ -101,6 +85,6 @@ def generate_launch_description():
 
 
   
-    return LaunchDescription([gazebo_sim, bridge, robot, twist_stamper,
+    return LaunchDescription([gazebo_sim, bridge, robot, 
                               robot_steering, robot_state_publisher,
-                              start_controllers, static_pub, static_pub2])
+                               static_pub, static_pub2])
