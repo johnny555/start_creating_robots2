@@ -59,18 +59,18 @@ def generate_launch_description():
                    '/realsense/image@sensor_msgs/msg/Image[gz.msgs.Image',
                    '/realsense/depth@sensor_msgs/msg/Image[gz.msgs.Image',
                    '/realsense/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
-                   '/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'
+                   '/model/krytn/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+                   '/model/krytn/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+                   '/model/krytn/tf@tf2_msgs/msg/TFMessage@gz.msgs.Pose_V',
+                    '/joint_states@sensor_msgs/msg/JointState@gz.msgs.Model'
                    ],
         output='screen',
-        remappings=[('/model/krytn/cmd_vel','/cmd_vel')]
+        remappings=[('/model/krytn/cmd_vel','/cmd_vel_smoothed'),
+                   ('/model/krytn/tf','/tf'),
+                   ('/model/krytn/odometry','/odom')]
         )
 
-    # A gui tool for easy tele-operation.
-    robot_steering = Node(
-        package="rqt_robot_steering",
-        executable="rqt_robot_steering",
-    )
-
+ 
     # Fix Frames while we wait for merged changes to make their way into released packages: 
     # https://github.com/gazebosim/gz-sensors/pull/446/commits/277d3946be832c14391b6feb6971e243f1968486 
     # This fix allows us to specify the frame for the sensor rather than create a fixed transform here. 
@@ -82,9 +82,6 @@ def generate_launch_description():
                       executable="static_transform_publisher",
                       arguments=["0","0","0","0","0","0",  "realsense_link", "krytn/base_footprint/realsense_d435"])
 
-
-
   
     return LaunchDescription([gazebo_sim, bridge, robot, 
-                              robot_steering, robot_state_publisher,
-                               static_pub, static_pub2])
+                              robot_state_publisher, static_pub, static_pub2 ])

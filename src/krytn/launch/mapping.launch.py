@@ -49,10 +49,9 @@ def generate_launch_description():
         arguments=[
             '-d',
             PathJoinSubstitution([base_path, 'config', rviz_config])
-        ]
+        ],
+        parameters=[('use_sim_time',"True")]
     )
-
-
 
 
     return LaunchDescription([gazebo, slam_toolbox, 

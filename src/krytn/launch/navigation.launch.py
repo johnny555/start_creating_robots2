@@ -31,7 +31,9 @@ def generate_launch_description():
         }.items(),
     )
 
-    nav_remapped = GroupAction(actions=[#remap, 
+    remap = SetRemap("cmd_vel_nav","cmd_vel")
+
+    nav_remapped = GroupAction(actions=[remap, 
         navigation])
 
 
