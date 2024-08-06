@@ -76,6 +76,13 @@
             "type": "shell",
             "command": "bash .vscode/scripts/first_robot_gazebo.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "Empty world with your robot ",
+            "detail": "Run Gazebo with your robot in an empty world!",
+            "type": "shell",
+            "command": "bash .vscode/scripts/first_robot_gazebo_empty.sh",
+            "problemMatcher": []
         }
     ]
 }
