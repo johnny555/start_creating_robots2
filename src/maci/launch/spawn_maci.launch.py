@@ -34,7 +34,7 @@ def generate_launch_description():
     robot = Node(
         package='ros_gz_sim',
         executable="create",
-        arguments="-topic robot_description -x -6.70 -y -9.34 -z 1.23".split(' '),
+        arguments="-topic robot_description -x 0 -y 0 -z 1.23".split(' '),
         name="spawn_robot",
         output="both"
     )
