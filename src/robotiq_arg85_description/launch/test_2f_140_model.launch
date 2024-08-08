@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+    <let name="robot_description" value="$(find xacro)/xacro $(find robotiq_2f_140_gripper_visualization)/urdf/robotiq_arg2f_140_model.xacro" />
+
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz2" pkg="rviz2" type="rviz" args="-d $(find robotiq_2f_140_gripper_visualization)/visualize.rviz" required="true" />
+</launch>

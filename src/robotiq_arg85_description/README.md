@@ -1,12 +1,14 @@
-robotiq_arg85_description
-=========================
+# Robotiq 140mm 2-Finger-Adaptive-Gripper 
 
-[![Build Status](https://travis-ci.org/a-price/robotiq_arg85_description.svg?branch=master)](https://travis-ci.org/a-price/robotiq_arg85_description)
+This package contains the URDF files describing the 140mm stroke gripper from robotiq, also known as series **C3**.
 
-ROS package providing a URDF model of the Robotiq 2-Finger Adaptive Robot Gripper 85.
+To test the gripper URDF description type 
 
-View the gripper in `RViz` by running
+```
+roslaunch robotiq_2f_140_gripper_visualization test_2f_140_model.launch 
+```
+## Robot Visual
+![140](https://user-images.githubusercontent.com/8356912/49428409-463f8580-f7a6-11e8-8278-5246acdc5c14.png)
 
-    roslaunch robotiq_arg85_description display.launch gui:=true
-
-![Display Model](images/display.png)
+## Robot Collision 
+![1402](https://user-images.githubusercontent.com/8356912/49428407-463f8580-f7a6-11e8-9c4e-df69e478f107.png)
