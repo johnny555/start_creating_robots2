@@ -30,7 +30,7 @@ def generate_launch_description():
     
     static_pub = Node(package="tf2_ros", 
                       executable="static_transform_publisher",
-                      arguments=["0","0","0","0","0","0",  "realsense_link", "maci/realsense_link/realsense_d435"])
+                      arguments=["0","0","0","0","0","0",  "realsense_link", "maci/ur5_base_link/realsense_d435"])
     
 
     maci = IncludeLaunchDescription(join(get_package_share_directory("maci"), "launch","spawn_maci.launch.py"))
