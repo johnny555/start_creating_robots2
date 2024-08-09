@@ -22,8 +22,8 @@
 
     <!-- Lets add a realsense camera to give some depth perception to Maci. -->
 
-    <xacro:realsense world_link_name="world">
-        <origin xyz="0 2.00 2.2" rpy="0 ${pi/4} -${pi/2}" />
+    <xacro:realsense world_link_name="ur5_base_link">
+        <origin xyz="0 -2.00 -2.2" rpy="0 -${pi/4} ${pi/2}" />
     </xacro:realsense>
 
 
