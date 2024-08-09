@@ -80,7 +80,7 @@
                     <depth_camera>
                         <clip>
                             <near>0.1</near>
-                            <far>3</far>
+                            <far>7</far>
                         </clip>
                     </depth_camera>
                     <noise>
